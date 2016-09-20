@@ -7,7 +7,7 @@ import random
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from plugins.engines.smarty import Smarty
 from core.channel import Channel
-from core.checks import detect_template_injection
+from core.checks import Checks
 from basetest import BaseTest
 
 class SmartySecuredTest(unittest.TestCase, BaseTest):
@@ -63,7 +63,7 @@ class SmartySecuredTest(unittest.TestCase, BaseTest):
             'injection_tag': '~'
         })
         
-        detect_template_injection(channel, [ self.plugin ])
+        Checks(channel).detect_template_injection([ self.plugin ])
         
         expected_data = self.expected_data.copy()
         expected_data.update({ 'prefix': '*}', 'suffix' : '{*'})

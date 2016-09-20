@@ -7,7 +7,7 @@ import random
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from plugins.engines.mako import Mako
 from core.channel import Channel
-from core.checks import detect_template_injection
+from core.checks import Checks
 import utils.loggers
 import logging
 
@@ -42,7 +42,7 @@ class ChannelTest(unittest.TestCase):
             'injection_tag': '*'
 
         })
-        detect_template_injection(channel, [ Mako ])
+        Checks(channel).detect_template_injection([ Mako ])
         del channel.data['os']
         self.assertEqual(channel.data, self.expected_data)
 
@@ -56,7 +56,7 @@ class ChannelTest(unittest.TestCase):
             'headers' : [ 'User-Agent: *' ],
             'injection_tag': '*'
         })
-        detect_template_injection(channel, [ Mako ])
+        Checks(channel).detect_template_injection([ Mako ])
         del channel.data['os']
         self.assertEqual(channel.data, self.expected_data)
 
@@ -71,7 +71,7 @@ class ChannelTest(unittest.TestCase):
             'force_level': [ 0, 0 ],
             'injection_tag': '*'
         })
-        detect_template_injection(channel, [ Mako ])
+        Checks(channel).detect_template_injection([ Mako ])
         del channel.data['os']
         self.assertEqual(channel.data, self.expected_data)
 
@@ -84,7 +84,7 @@ class ChannelTest(unittest.TestCase):
             'force_level': [ 0, 0 ],
             'injection_tag': '~'
         })
-        detect_template_injection(channel, [ Mako ])
+        Checks(channel).detect_template_injection([ Mako ])
         
         del channel.data['os']
         self.assertEqual(channel.data, self.expected_data)
@@ -99,7 +99,7 @@ class ChannelTest(unittest.TestCase):
             'force_level': [ 0, 0 ],
             'injection_tag': '*'
         })
-        detect_template_injection(channel, [ Mako ])
+        Checks(channel).detect_template_injection([ Mako ])
         
         del channel.data['os']
         self.assertEqual(channel.data, self.expected_data)
@@ -111,7 +111,7 @@ class ChannelTest(unittest.TestCase):
             'force_level': [ 0, 0 ],
             'injection_tag': '*'
         })
-        detect_template_injection(channel, [ Mako ])
+        Checks(channel).detect_template_injection([ Mako ])
         
         del channel.data['os']
         self.assertEqual(channel.data, self.expected_data)
@@ -123,7 +123,7 @@ class ChannelTest(unittest.TestCase):
             'force_level': [ 0, 0 ],
             'injection_tag': '*'
         })
-        detect_template_injection(channel, [ Mako ])
+        Checks(channel).detect_template_injection([ Mako ])
         
         self.assertEqual(channel.data, {})
 
@@ -134,7 +134,7 @@ class ChannelTest(unittest.TestCase):
             'force_level': [ 0, 0 ],
             'injection_tag': '*'
         })
-        detect_template_injection(channel, [ Mako ])
+        Checks(channel).detect_template_injection([ Mako ])
         
         del channel.data['os']
         self.assertEqual(channel.data, self.expected_data)    
@@ -146,7 +146,7 @@ class ChannelTest(unittest.TestCase):
             'force_level': [ 0, 0 ],
             'injection_tag': '*'
         })
-        detect_template_injection(channel, [ Mako ])
+        Checks(channel).detect_template_injection([ Mako ])
         
         self.assertEqual(channel.data, {})    
         

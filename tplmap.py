@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from utils import cliparser
-from core import checks
 from core.channel import Channel
 from utils.loggers import log
+from core.checks import Checks
 
 version = '0.2'
 
@@ -16,7 +16,8 @@ def main():
     # Add version
     args['version'] = version
     
-    checks.check_template_injection(Channel(args))
+    checks = Checks(Channel(args))
+    checks.check_template_injection()
     
 if __name__ == '__main__':
 

@@ -5,8 +5,7 @@ import random
 
 sys.path.insert(1, os.path.join(sys.path[0], '..'))
 from core.channel import Channel
-from core.checks import check_template_injection
-from core.checks import detect_template_injection
+from core.checks import Checks
 from utils import rand
 from utils import strings
 import utils.loggers
@@ -24,7 +23,8 @@ class BaseTest(object):
             'force_level': [ level, closure_level ],
             'injection_tag': '*'
         })
-        obj = detect_template_injection(channel, [ self.plugin ])
+        checks = Checks(channel)
+        obj = checks.detect_template_injection([ self.plugin ])
 
         # Delete OS to make the tests portable
         if 'os' in channel.data:
@@ -40,7 +40,8 @@ class BaseTest(object):
             'level': 5,
             'injection_tag': '*'
         })
-        check_template_injection(channel)
+        checks = Checks(channel)
+        checks.check_template_injection()
 
         # Delete OS to make the tests portable
         if 'os' in channel.data:
